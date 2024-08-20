@@ -15,7 +15,7 @@ const HeroSection = () => {
             alt="Hero"
             className="absolute inset-0 object-cover w-full h-full"
           />
-          <div className="absolute inset-0 bg-black opacity-20"></div> {/* Semi-transparent overlay */}
+          <div className="absolute inset-0 bg-gray-100 opacity-20"></div> {/* Semi-transparent overlay */}
           <div className="relative flex items-center justify-center h-full text-center text-white p-4">
             <div>
               <h1 className="text-5xl font-bold mb-4">Welcome </h1>
@@ -33,7 +33,7 @@ const HeroSection = () => {
             alt="Hero"
             className="absolute inset-0 object-cover w-full h-full"
           />
-          <div className="absolute inset-0 bg-black opacity-50"></div> {/* Semi-transparent overlay */}
+          <div className="absolute inset-0 bg-gray-100 opacity-50"></div> {/* Semi-transparent overlay */}
           <div className="relative flex items-center justify-center h-full text-center text-white p-4">
             <div>
               <h1 className="text-5xl font-bold mb-4">Our Products</h1>
@@ -54,7 +54,7 @@ const HeroSection = () => {
             alt="Hero"
             className="absolute inset-0 object-cover w-full h-full"
           />
-          <div className="absolute inset-0 bg-black opacity-20"></div> {/* Semi-transparent overlay */}
+          <div className="absolute inset-0 bg-gray-100 opacity-20"></div> {/* Semi-transparent overlay */}
           <div className="relative flex items-center justify-center h-full text-center text-white p-4">
             <div>
               <h1 className="text-5xl font-bold mb-4">About Us</h1>
