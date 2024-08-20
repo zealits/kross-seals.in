@@ -7,6 +7,7 @@ const AboutUs = () => {
       <div className="container mx-auto px-4">
 <div className='mb-20'>
         {/* Journey Section */}
+        <div className='text-3xl font-bold text-center'>History</div>
         <Timeline/>
         </div>
         {/* Leadership Section */}
