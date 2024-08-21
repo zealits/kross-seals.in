@@ -47,26 +47,26 @@ const HeroSection = () => {
         </section>
          
         );
-      case '/aboutus':
-        return (
-          <section className="relative h-screen bg-white">
-          <img
-  src={oilSealsImg}
-  alt="Hero"
-  className="absolute inset-0 object-cover w-full h-full"
-/>
-          <div className="absolute inset-0 bg-gray-100 opacity-20"></div> {/* Semi-transparent overlay */}
-          <div className="relative flex items-center justify-center h-full text-center text-white p-4">
-            <div>
-              <h1 className="text-5xl font-bold mb-4">About Us</h1>
-              {/* <p className="text-lg mb-8">Learn more about our history and mission</p> */}
+//       case '/aboutus':
+//         return (
+//           <section className="relative h-screen bg-white">
+//           <img
+//   src={oilSealsImg}
+//   alt="Hero"
+//   className="absolute inset-0 object-cover w-full h-full"
+// />
+//           <div className="absolute inset-0 bg-gray-100 opacity-20"></div> {/* Semi-transparent overlay */}
+//           <div className="relative flex items-center justify-center h-full text-center text-white p-4">
+//             <div>
+//               <h1 className="text-5xl font-bold mb-4">About Us</h1>
+//               {/* <p className="text-lg mb-8">Learn more about our history and mission</p> */}
               
-            </div>
-          </div>
-        </section>
+//             </div>
+//           </div>
+//         </section>
           
-        );
-      default:
+//         );
+//       default:
         return null; // No Hero section for other routes
     }
   };
