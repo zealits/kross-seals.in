@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import oilSealsImg from '../assets/Photos/Oil-Seals.png';
 
 
 const HeroSection = () => {
@@ -11,10 +12,10 @@ const HeroSection = () => {
         return (
           <section className="relative h-screen bg-gray-800">
           <img
-            src="src\assets\Photos\Oil-Seals.png" // Replace with the path to your product-related image
-            alt="Hero"
-            className="absolute inset-0 object-cover w-full h-full"
-          />
+  src={oilSealsImg}
+  alt="Hero"
+  className="absolute inset-0 object-cover w-full h-full"
+/>
           <div className="absolute inset-0 bg-gray-100 opacity-20"></div> {/* Semi-transparent overlay */}
           <div className="relative flex items-center justify-center h-full text-center text-white p-4">
             <div>
@@ -28,11 +29,11 @@ const HeroSection = () => {
       case '/products':
         return (
           <section className="relative h-screen bg-gray-800">
-          <img
-            src="src\assets\Photos\Oil-Seals.png" // Replace with the path to your product-related image
-            alt="Hero"
-            className="absolute inset-0 object-cover w-full h-full"
-          />
+         <img
+  src={oilSealsImg}
+  alt="Hero"
+  className="absolute inset-0 object-cover w-full h-full"
+/>
           <div className="absolute inset-0 bg-gray-100 opacity-50"></div> {/* Semi-transparent overlay */}
           <div className="relative flex items-center justify-center h-full text-center text-white p-4">
             <div>
@@ -50,10 +51,10 @@ const HeroSection = () => {
         return (
           <section className="relative h-screen bg-white">
           <img
-            src="src\assets\Photos\Oil-Seals.png" // Replace with the path to your product-related image
-            alt="Hero"
-            className="absolute inset-0 object-cover w-full h-full"
-          />
+  src={oilSealsImg}
+  alt="Hero"
+  className="absolute inset-0 object-cover w-full h-full"
+/>
           <div className="absolute inset-0 bg-gray-100 opacity-20"></div> {/* Semi-transparent overlay */}
           <div className="relative flex items-center justify-center h-full text-center text-white p-4">
             <div>

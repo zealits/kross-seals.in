@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import imageurl from '../assets/Photos/kross-logo.png';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +29,7 @@ const NavBar = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link to="/">
-              <img src="src\assets\Photos\kross-logo.png" alt="Kross International" className="h-8 w-auto" />
+              <img src={imageurl} alt="Kross International" className="h-8 w-auto" />
             </Link>
           </div>
           <div className="block lg:hidden relative">
