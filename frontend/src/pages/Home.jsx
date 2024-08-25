@@ -72,16 +72,7 @@ const HomePage = () => {
                 </div>
                 <div className="transform scale-50 translate-y-[-200%] transition-all duration-500 hover:opacity-100 hover:translate-y-0">
                   <table className="text-left w-full text-white">
-                    <tbody>
-                      <tr>
-                        <th>Width</th>
-                        <th>Height</th>
-                      </tr>
-                      <tr>
-                        <td>{product.width}</td>
-                        <td>{product.height}</td>
-                      </tr>
-                    </tbody>
+                    
                   </table>
                 </div>
               </div>
