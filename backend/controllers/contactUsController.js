@@ -1,4 +1,4 @@
-const ContactUs = require('../Models/contactUsModel');
+const ContactUs = require('../models/ContactUsModel.js');
 const nodemailer = require('nodemailer');
 
 exports.submitContactForm = async (req, res) => {
@@ -10,7 +10,6 @@ exports.submitContactForm = async (req, res) => {
   }
 
   try {
-    // Save the contact form data to the database
     const newContact = new ContactUs({ name, email, message });
     await newContact.save();
 
@@ -18,9 +17,8 @@ exports.submitContactForm = async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'your-email@gmail.com',  // Replace with your email
-        pass: 'your-email-password',   // Replace with your email password or app-specific password
-      },
+        user: 'your-email@gmail.com', 
+        pass: 'your-email-password',        },
     });
 
     const mailOptions = {
