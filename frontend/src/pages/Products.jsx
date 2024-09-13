@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; // Import Link for navigation
+import { Link } from "react-router-dom";
 import FilterComponent from "../components/filterComponent";
 
 const Products = () => {
@@ -46,8 +46,8 @@ const Products = () => {
   }
 
   return (
-    <div className="container mx-auto my-10 px-4">
-      <h2 className="text-3xl font-bold text-center mb-6">Our Products</h2>
+    <div className="container mx-auto my-10 px-4 lg:px-8 max-w-7xl">
+      <h2 className="text-3xl font-bold text-center mb-8">Our Products</h2>
 
       <FilterComponent
         filters={filters}
@@ -55,10 +55,10 @@ const Products = () => {
         handleResetFilters={handleResetFilters}
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {Array.isArray(products) && products.length > 0 ? (
           products.map((product) => (
-            <div key={product._id} className="bg-white shadow-lg rounded-lg p-4 transition-transform duration-300 hover:scale-105">
+            <div key={product._id} className="bg-white shadow-lg rounded-lg flex flex-col p-4 transition-transform duration-300 hover:scale-105 mx-2 my-4">
               <div className="relative">
                 <img
                   src={product.images[0].url}
@@ -66,20 +66,21 @@ const Products = () => {
                   className="w-full h-48 object-cover rounded-lg hover:shadow-2xl hover:brightness-90"
                 />
               </div>
-              <h3 className="text-xl font-semibold mt-4">{product.name}</h3>
-              <p className="text-gray-600 mt-2">${product.price}</p>
-              <p className="text-gray-500 mt-2">
-                Category: {product.category.level1}
-              </p>
-              <div className="flex justify-between items-center mt-4">
-                <button
-                  onClick={() => handleAddToCart(product._id)}
-                  className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+              {/* Product Name and Category */}
+              <div className="p-4 flex-grow">
+                <h1 className="text-lg font-bold truncate mb-2">{product.name}</h1>
+                <p className="text-sm text-gray-600 truncate">{product.category.level1}</p>
+              </div>
+              {/* Shop Button */}
+              <div className="p-4 pt-0 mt-auto flex justify-center">
+                <Link
+                  to={`/product/${product._id}`}
+                  className="inline-flex items-center px-4 py-2 text-blue-600 text-center transition-colors duration-300 relative before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-full before:h-[2px] before:bg-blue-600 before:scale-x-0 hover:before:scale-x-100 hover:before:transition-transform hover:before:duration-300"
                 >
-                  Add to Cart
-                </button>
-                <Link to={`/product/${product._id}`} className="text-blue-500 hover:underline">
-                  Read More
+                  Shop Now
+                  <svg className="w-4 h-4 ml-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
                 </Link>
               </div>
             </div>

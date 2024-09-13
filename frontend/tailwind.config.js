@@ -28,12 +28,27 @@ export default {
         'primary-dark': '#002244',
         'light-gray': '#F5F5F5',
       },
+      scrollbar: {
+        hide: 'scrollbar-hidden'
+      },
       
     },
   },
   
   
   plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.scrollbar-hide': {
+          '-ms-overflow-style': 'none', /* IE and Edge */
+          'scrollbar-width': 'none', /* Firefox */
+        },
+        '.scrollbar-hide::-webkit-scrollbar': {
+          display: 'none', /* Chrome, Safari, and Opera */
+        },
+      }, ['responsive', 'hover']);
+    },
+    require('tailwind-scrollbar')
     
   ],
 }

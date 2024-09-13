@@ -8,11 +8,16 @@ import Products from './pages/Products';
 import ContactUs from './pages/Contact';
 import Footer from './layout/Footer';
 import HeroSection from './components/HeroSection'
+import Stores from './pages/Stores';
+import ScrollTop from './components/ScrollTop';
+import './index.css';
 
 const App = () => {
   return (
     <>
+    
       <Navbar />
+      <ScrollTop /> 
       <HeroSection/>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -20,8 +25,10 @@ const App = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/infrastructure" element={<Infrastructure />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/stores" element={<Stores/>}/>
       </Routes>
       <Footer/>
+     
     </>
   );
 };

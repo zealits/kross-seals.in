@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import imageurl from '../assets/Photos/kross-logo.png';
 
@@ -14,54 +14,50 @@ const DropdownMenu = ({ isOpen, closeDropdown }) => (
     <Link
       to="/aboutus"
       onClick={closeDropdown}
-      className="block text-black hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium"
+      className="block text-black hover:text-blue-600 hover:font-bold px-3 py-2 rounded-md text-sm font-medium"
     >
       About Us
     </Link>
     <Link
       to="/products"
       onClick={closeDropdown}
-      className="block text-black hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium"
+      className="block text-black hover:text-blue-600 hover:font-bold px-3 py-2 rounded-md text-sm font-medium"
     >
       Products
     </Link>
     <Link
       to="/infrastructure"
       onClick={closeDropdown}
-      className="block text-black hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium"
+      className="block text-black hover:text-blue-600 hover:font-bold px-3 py-2 rounded-md text-sm font-medium"
     >
       Infrastructure
     </Link>
     <Link
       to="/contact"
       onClick={closeDropdown}
-      className="block text-black hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium"
+      className="block text-black hover:text-blue-600 hover:font-bold px-3 py-2 rounded-md text-sm font-medium"
     >
       Contact
+    </Link>
+    <Link
+      to="/careers"
+      onClick={closeDropdown}
+      className="block text-black hover:text-blue-600 hover:font-bold px-3 py-2 rounded-md text-sm font-medium"
+    >
+      Careers
+    </Link>
+    <Link
+      to="/stores"
+      onClick={closeDropdown}
+      className="block text-black hover:text-blue-600 hover:font-bold px-3 py-2 rounded-md text-sm font-medium"
+    >
+      Stores
     </Link>
   </div>
 );
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [navBackground, setNavBackground] = useState('bg-transparent');
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const offset = window.scrollY;
-      if (offset > 100) {
-        setNavBackground('bg-white shadow-md');
-      } else {
-        setNavBackground('bg-transparent');
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -72,15 +68,68 @@ const NavBar = () => {
   };
 
   return (
-    <nav className={`${navBackground} fixed w-full z-10 top-0 py-3 transition-colors duration-300`}>
+    <nav className="bg-white shadow-md fixed w-full z-10 top-0 py-3 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
+          {/* Logo */}
           <div className="flex items-center">
             <Link to="/">
-              <img src={imageurl} alt="Kross International" className="h-8 w-auto" />
+              <img src={imageurl} alt="Kross International" className="h-12 w-auto" />
             </Link>
           </div>
-          <div className="block lg:hidden relative">
+          {/* Navigation Links */}
+          <div className="flex-1 flex items-center justify-center space-x-4">
+            <div className="hidden lg:flex lg:items-center lg:w-auto">
+              <div className="flex items-baseline space-x-4">
+                <Link
+                  to="/aboutus"
+                  className="text-black hover:text-blue-600 hover:font-bold px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  About Us
+                </Link>
+                <Link
+                  to="/products"
+                  className="text-black hover:text-blue-600 hover:font-bold px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Products
+                </Link>
+                <Link
+                  to="/infrastructure"
+                  className="text-black hover:text-blue-600 hover:font-bold px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Infrastructure
+                </Link>
+                <Link
+                  to="/contact"
+                  className="text-black hover:text-blue-600 hover:font-bold px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Contact
+                </Link>
+                <Link
+                  to="/careers"
+                  className="text-black hover:text-blue-600 hover:font-bold px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Careers
+                </Link>
+                <Link
+                  to="/stores"
+                  className="text-black hover:text-blue-600 hover:font-bold px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Stores
+                </Link>
+              </div>
+            </div>
+          </div>
+          {/* Search Bar */}
+          <div className="hidden lg:flex lg:items-center lg:ml-6">
+            <input
+              type="text"
+              placeholder="Search"
+              className="px-3 py-1 border rounded-md text-sm"
+            />
+          </div>
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden flex items-center">
             <button
               onClick={toggleDropdown}
               className="text-black hover:text-gray-600 focus:outline-none focus:text-white"
@@ -102,35 +151,6 @@ const NavBar = () => {
             </button>
             {/* Dropdown Menu */}
             <DropdownMenu isOpen={isOpen} closeDropdown={closeDropdown} />
-          </div>
-          {/* Regular Navbar Links for Desktop */}
-          <div className="hidden lg:flex lg:items-center lg:w-auto">
-            <div className="ml-10 flex items-baseline space-x-4">
-              <Link
-                to="/aboutus"
-                className="text-black hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium"
-              >
-                About Us
-              </Link>
-              <Link
-                to="/products"
-                className="text-black hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Products
-              </Link>
-              <Link
-                to="/infrastructure"
-                className="text-black hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Infrastructure
-              </Link>
-              <Link
-                to="/contact"
-                className="text-black hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Contact
-              </Link>
-            </div>
           </div>
         </div>
       </div>

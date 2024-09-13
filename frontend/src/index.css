@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 /* For rotation effect */
-@layer utilities {
+/* @layer utilities {
   .perspective-500 {
     perspective: 500px;
   }
@@ -17,5 +17,9 @@
   .rotate-y-180 {
     transform: rotateY(180deg);
   }
-}
+} */
+/* global.css or index.css */
+
+
+
   

@@ -1,70 +1,112 @@
-import React, { useEffect } from 'react';
-import 'aos/dist/aos.css'; // Import AOS styles
-import AOS from 'aos';
-import image1 from '../assets/Photos/download1.jpg'
-
-
-const timelineItems = [
-  {  text: 'Established KROSS INTERNATIONAL with a capacity to manufacture 50,000 Sealing Rings / annum. ', image:image1, year:"1987" },
-  {  text: 'Awarded ” G. S. Parkhe Industrial Merit Award “ by Maratha Chember of Commerce & Industries for Manufacturing innovative Product (Import Substitution ).  Awarded ” First award for Best Small Scale Industries of the district “ by DIC, Government of Maharashtra, Mumbai', year: "1988" ,image:image1},
-  {  text: 'AwardedÂ “ Dadasaheb Rawal Award “ Instituted by Maharashtra of Commerce, Mumbai for Excellence in individual entrepreneurship ', image:image1, year:"1989" },
-  {  text: ' Awarded ” Kohinoor Ratna Award “ Instituted by All India Economic Forum, New Delhi for excellence in individual Entrepreneurship for Import substitution, making the country self-reliant', image:image1, year:"1990" },
-  {  text: 'Awarded ” Udyog Jyoti Award “ Instituted by All India Economic Forum, New Delhi for excellence in individual Entrepreneurship for Import substitution. ', image:image1, year:"1991" },
-  {  text: ' KROSS INTERNATIONAL certified to ISO:9002 by BVQI.', image:image1, year:"1997" },
-  {  text: 'Recipient of Rashtriya Samman Patra instituted by Ministry of Finance, Government of India, towards the economic contribution of the country. ', image:image1, year:"2000" },
-  {  text: 'KROSS INTERNATIONAL was certified ISO:9001:2000. ', image:image1, year:"2001" },
-  // Add more items as needed
-];
+import React, { useRef, useState, useEffect } from 'react';
 
 const Timeline = () => {
+  const sliderRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
   useEffect(() => {
-    AOS.init({ duration: 1000 }); // Initialize AOS
+    const slider = sliderRef.current;
+    let interval;
+    let startScrollPosition = 0;
+
+    // Initialize the timeline by duplicating items
+    if (slider) {
+      const items = Array.from(slider.children);
+      items.forEach(item => slider.appendChild(item.cloneNode(true))); // Clone and append items
+    }
+
+    const autoScroll = () => {
+      if (slider) {
+        const maxScrollLeft = slider.scrollWidth / 2; // Adjust maxScrollLeft to half of the total scrollable width
+        const currentScrollLeft = slider.scrollLeft;
+
+        if (currentScrollLeft >= maxScrollLeft) {
+          slider.scrollLeft = startScrollPosition;
+        } else {
+          slider.scrollBy({
+            left: 2, // Increased scroll amount for faster scrolling
+            behavior: 'smooth',
+          });
+        }
+      }
+    };
+
+    interval = setInterval(autoScroll, 10); // Adjust interval for speed
+
+    return () => clearInterval(interval);
   }, []);
 
-  return (
-    <div className="relative max-w-6xl mx-auto py-8 px-4">
-    {/* Central Connecting Line */}
-    <div className="absolute top-0 left-1/2 w-0.5 h-full bg-gray-300 transform -translate-x-1/2"></div>
-    
-    {timelineItems.map((item, index) => (
-      <div
-        key={index}
-        className={`relative mb-10 flex ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}
-        data-aos="fade-up"
-      >
-        {/* Line from Card to Central Line */}
-        <div
-  className={`absolute top-1/2 w-72 h-0.5 bg-gray-300 transform ${index % 2 === 0 ? 'left-1/2' : 'right-1/2'} ${
-    index % 2 === 0 ? '-translate-x-1/2' : 'translate-x-1/2'
-  }`}
-></div>
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setStartX(e.pageX - sliderRef.current.offsetLeft);
+    setScrollLeft(sliderRef.current.scrollLeft);
+  };
 
-{/* Year Container */}
-<div className={`absolute top-1/2 ${index % 2 === 0 ? 'left-1/2' : 'right-1/2'} transform ${
-  index % 2 === 0 ? 'translate-x-[350%]' : '-translate-x-[350%]'
-} -translate-y-1/2`}>
-  <div className="text-gray-500 text-xl">
-    {item.year}
-  </div>
-</div>
-        
-        {/* Card Container */}
-        <div className={`relative w-96 h-64 perspective-500 ${index % 2 === 0 ? 'ml-4' : 'mr-4'}`}>
-          <div className="w-full h-full transition-transform duration-700 transform-style-preserve-3d group hover:rotate-y-180">
-            <div className="absolute w-full h-full bg-white text-blue-900 text-center text-xl flex items-center justify-center border rounded-lg backface-hidden">
-              <h2>{item.text}</h2>
-            </div>
-            <div className="absolute w-full h-full bg-white text-center text-xl flex items-center justify-center border rounded-lg rotate-y-180 backface-hidden">
-              {/* Check if an image exists and render it */}
-              {item.image && <img src={item.image} alt="Timeline Item" className="w-full h-full object-contain" />}
-            </div>
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - sliderRef.current.offsetLeft;
+    const walk = (x - startX) * 2; // Scroll-fast
+    sliderRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleArrowClick = (direction) => {
+    sliderRef.current.scrollBy({
+      left: direction === 'left' ? -200 : 200, // Adjusted scroll amount
+      behavior: 'smooth',
+    });
+  };
+
+  return (
+    <section id="timeline" className="py-12 bg-light-gray text-white">
+      <div className="container mx-auto text-center relative">
+        {/* <h1 className="text-4xl font-bold mb-6">Fancy Timeline, Bro</h1> */}
+        <div className="relative">
+          {/* <button
+            className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-light-gray p-2 rounded-full shadow-lg z-10"
+            onClick={() => handleArrowClick('left')}
+          >
+            <span className="material-icons text-white">chevron_left</span>
+          </button>
+          <button
+            className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-light-gray p-2 rounded-full shadow-lg z-10"
+            onClick={() => handleArrowClick('right')}
+          >
+            <span className="material-icons text-white">chevron_right</span>
+          </button> */}
+          <div
+            ref={sliderRef}
+            className="flex overflow-x-auto scrollbar-hide py-4 relative"
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseUp}
+          >
+            {[ // Original timeline items
+                {  text: 'Established KROSS INTERNATIONAL with a capacity to manufacture 50,000 Sealing Rings / annum. ',  year:"1987" },
+                {  text: 'Awarded ” G. S. Parkhe Industrial Merit Award “ by Maratha Chember of Commerce & Industries for Manufacturing innovative Product (Import Substitution ).  Awarded ” First award for Best Small Scale Industries of the district “ by DIC, Government of Maharashtra, Mumbai', year: "1988" ,},
+                {  text: 'AwardedÂ “ Dadasaheb Rawal Award “ Instituted by Maharashtra of Commerce, Mumbai for Excellence in individual entrepreneurship ',  year:"1989" },
+                {  text: ' Awarded ” Kohinoor Ratna Award “ Instituted by All India Economic Forum, New Delhi for excellence in individual Entrepreneurship for Import substitution, making the country self-reliant',  year:"1990" },
+                {  text: 'Awarded ” Udyog Jyoti Award “ Instituted by All India Economic Forum, New Delhi for excellence in individual Entrepreneurship for Import substitution. ',  year:"1991" },
+                {  text: ' KROSS INTERNATIONAL certified to ISO:9002 by BVQI.',  year:"1997" },
+                {  text: 'Recipient of Rashtriya Samman Patra instituted by Ministry of Finance, Government of India, towards the economic contribution of the country. ',  year:"2000" },
+                {  text: 'KROSS INTERNATIONAL was certified ISO:9001:2000. ',  year:"2001" },
+            ].map((item, index) => (
+              <div key={index} className="flex-shrink-0 w-96 h-72 mx-4 bg-white text-black rounded-lg p-6 shadow-lg">
+                <p className="text-yellow-400 text-2xl font-semibold">{item.year}</p>
+                <p className="mt-2 text-lg">{item.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    ))}
-  </div>
-  
-
+    </section>
   );
 };
 
